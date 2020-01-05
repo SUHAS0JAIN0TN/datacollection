@@ -1,0 +1,212 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>simple maps page</title>
+</head>
+<body>
+	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15551.702742106041!2d77.52972380478515!3d12.976604892054867!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3ddddccc3acb%3A0x4ea472db769a21aa!2sVijayanagar!5e0!3m2!1sen!2sin!4v1574246030894!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>{% load static %}
+  <body style="">
+      
+      <div style="margin-top: 40px; text-align: right;margin-right: 100px;">
+
+                          
+                          <a href="{% url 'logout' %}"><div style="display: inline-block;font-size: 25px; margin-right: 10px;">Logout</div></a>
+
+          </div>
+
+        <!-- <section> -->
+            <!-- <div id="map" style="height: 100%;"></div> -->
+            <!-- <div><img src="{% static 'images/locate3.png' %}" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%); padding-bottom: 45px;"></div>   -->  
+        <!-- </section> -->
+        <div style="margin:  0 auto;width: 800px;background-color: ;margin-bottom: 50px;">
+          <div>
+            <h3>Query 1</h3>
+            <div>
+              <div><span style="font-family: Courier New; font-size: 10pt;">
+              <span style="color: blue; ">SELECT</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">datereceived</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">samptype</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisprojnumber</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysistype</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>
+              <br/><span style="color: blue; ">FROM</span>&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">LEFT</span>&nbsp;<span style="color: blue; ">JOIN</span>&nbsp;<span style="color: maroon; ">samplen1</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">ON</span>&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span>&nbsp;<span style="color: silver; ">=</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">LEFT</span>&nbsp;<span style="color: blue; ">JOIN</span>&nbsp;<span style="color: maroon; ">analysisn1</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">ON</span>&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisprojnumber</span>&nbsp;<span style="color: silver; ">=</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span>
+              <br/><span style="color: blue; ">WHERE</span>&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<input type="text" name="AComany_name" style="width: 200px;" >
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">OR</span>&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<input type="text" name="SComany_name" style="width: 200px;" >
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">OR</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<input type="text" name="PComany_name" style="width: 200px;" ><span style="color: silver; ">;</span>&nbsp;<input type="submit" name="submit_table_1" value="disply table"><input type="submit" name="submit_1" value="data in file">
+              </span>
+              </div>
+
+            </div>
+          </div>
+
+
+
+          <div>
+            <h3>Query 2</h3>
+
+            <div><span style="font-family: Courier New; font-size: 10pt;">
+              <span style="color: blue; ">SELECT</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">datereceived</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">sampletypes</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projcgmp</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">samptype</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">datereceived</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisprojnumber</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysistype</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span><span style="color: silver; ">,</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">methodservicetype</span>
+              <br/><span style="color: blue; ">FROM</span>&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project_formn1</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">LEFT</span>&nbsp;<span style="color: blue; ">JOIN</span>&nbsp;<span style="color: maroon; ">samplen1</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">ON</span>&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span>&nbsp;<span style="color: silver; ">=</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">LEFT</span>&nbsp;<span style="color: blue; ">JOIN</span>&nbsp;<span style="color: maroon; ">analysisn1</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">ON</span>&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisprojnumber</span>&nbsp;<span style="color: silver; ">=</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">projectnumber</span>
+              <br/><span style="color: blue; ">WHERE</span>&nbsp;&nbsp;<span style="color: maroon; ">(</span>&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">datereceived</span>&nbsp;<span style="color: blue; ">BETWEEN</span>&nbsp;<span style="color: red; "><input type="text" name="Q2D1" style="width: 200px;" ></span>&nbsp;<span style="color: blue; ">AND</span>&nbsp;<span style="color: red; "><input type="text" name="Q2D2" style="width: 200px;" ></span>&nbsp;<span style="color: maroon; ">)</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">AND</span>&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<span style="color: red; "><input type="text" name="Q2P1" style="width: 200px;" ></span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">OR</span>&nbsp;<span style="color: maroon; ">samplen1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<span style="color: red; "><input type="text" name="Q2P2" style="width: 200px;" ></span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">OR</span>&nbsp;<span style="color: maroon; ">project_formn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">companyname</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<span style="color: red; "><input type="text" name="Q2P3" style="width: 200px;" ></span>&nbsp;<input type="submit" name="submit_table_2" value="disply table"><input type="submit" name="submit_2" value="data in file">
+              </span>
+            </div>
+
+
+          </div>
+
+
+          <div>
+            <h3>Query 3</h3>
+            <div><span style="font-family: Courier New; font-size: 10pt;">
+              <span style="color: blue; ">SELECT</span>&nbsp;<span style="color: silver; ">*</span>
+              <br/><span style="color: blue; ">FROM</span>&nbsp;&nbsp;&nbsp;<span style="color: maroon; ">project</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisn1</span>
+              <br/><span style="color: blue; ">WHERE</span>&nbsp;&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisinstr</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<span style="color: red; "><input type="text" name="Q3P1" style="width: 200px;" ></span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">AND</span>&nbsp;<span style="color: maroon; ">(</span>&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">datereceived</span>&nbsp;<span style="color: blue; ">BETWEEN</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red; "><input type="text" name="Q3D1" style="width: 200px;" ></span>&nbsp;<span style="color: blue; ">AND</span>&nbsp;<span style="color: red; "><input type="text" name="Q3D2" style="width: 200px;" ></span>&nbsp;<span style="color: maroon; ">)</span>
+              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue; ">AND</span>&nbsp;<span style="color: maroon; ">analysisn1</span><span style="color: silver; ">.</span><span style="color: maroon; ">analysisassign</span>&nbsp;<span style="color: blue; ">LIKE</span>&nbsp;<span style="color: red; "><input type="text" name="Q3P2" style="width: 200px;" ></span>&nbsp;<input type="submit" name="submit_table_3" value="disply table"><input type="submit" name="submit_3" value="data in file">
+              </span>
+            </div>
+          </div>
+          <div></div>
+
+        </div>
+
+
+
+
+
+
+    <script>
+      $(function(){
+        $('input[name="submit_1"]').click(function(){
+          // alert($(this).attr('number'));
+          window.open( "{% url 'query1' %}"+"?AComany_name="+$('input[name="AComany_name"]').val()+"&SComany_name="+$('input[name="SComany_name"]').val()+"&PComany_name="+$('input[name="PComany_name"]').val(), "_blank"); 
+        });
+
+        $('input[name="submit_table_1"]').click(function(){
+          // alert($(this).attr('number'));
+          window.open( "{% url 'query1_table' %}"+"?AComany_name="+$('input[name="AComany_name"]').val()+"&SComany_name="+$('input[name="SComany_name"]').val()+"&PComany_name="+$('input[name="PComany_name"]').val(), "_blank"); 
+        });
+
+        $('input[name="submit_2"]').click(function(){
+          // alert($(this).attr('number'));
+          window.open( "{% url 'query2' %}"+"?Q2D1="+$('input[name="Q2D1"]').val()+"&Q2D2="+$('input[name="Q2D2"]').val()+"&Q2P1="+$('input[name="Q2P1"]').val()+"&Q2P2="+$('input[name="Q2P2"]').val()+"&Q2P3="+$('input[name="Q2P3"]').val(), "_blank"); 
+        });
+
+        $('input[name="submit_table_2"]').click(function(){
+          // alert($(this).attr('number'));
+          window.open( "{% url 'query2_table' %}"+"?Q2D1="+$('input[name="Q2D1"]').val()+"&Q2D2="+$('input[name="Q2D2"]').val()+"&Q2P1="+$('input[name="Q2P1"]').val()+"&Q2P2="+$('input[name="Q2P2"]').val()+"&Q2P3="+$('input[name="Q2P3"]').val(), "_blank"); 
+        });
+
+        $('input[name="submit_3"]').click(function(){
+          // alert($(this).attr('number'));
+          window.open( "{% url 'query3' %}"+"?Q3D1="+$('input[name="Q3D1"]').val()+"&Q3D2="+$('input[name="Q3D2"]').val()+"&Q3P1="+$('input[name="Q3P1"]').val()+"&Q3P2="+$('input[name="Q3P2"]').val(), "_blank"); 
+        });
+
+        $('input[name="submit_table_3"]').click(function(){
+          // alert($(this).attr('number'));
+          window.open( "{% url 'query3_table' %}"+"?Q3D1="+$('input[name="Q3D1"]').val()+"&Q3D2="+$('input[name="Q3D2"]').val()+"&Q3P1="+$('input[name="Q3P1"]').val()+"&Q3P2="+$('input[name="Q3P2"]').val(), "_blank"); 
+        });
+      });
+      // var map;
+      // function initMap() {
+      //   map = new google.maps.Map(document.getElementById('map'), {
+      //     center: {lat: 12.96, lng: 77.58},
+      //     zoom: 11,
+      //     fullscreenControl: false
+      //   });
+      //   // map.addListener('click', function(e) {
+      //   //   placeMarkerAndPanTo(e.latLng, map);
+      //   //   console.log(e.latLng.toString())
+      //   // });
+      // }
+
+      // function placeMarkerAndPanTo(latLng, map) {
+      //   var marker = new google.maps.Marker({
+      //     position: latLng,
+      //     map: map
+      //   });
+      //   map.panTo(latLng);
+
+      // }
+      // $.getJSON('',function(data){
+      //   console.log(data.length);
+      //   var markers=[];
+      //   var infoWindows=[];
+      //   for (d of data){
+      //     var marker = new google.maps.Marker({
+      //       position: new google.maps.LatLng({lat:parseFloat(d.latitude),lng:parseFloat(d.longitude)}),
+      //       map: map
+      //     });
+      //     console.log(d['latitude']);
+      //     var infowindow = new google.maps.InfoWindow();
+      //     // marker.addListener('click', function() {
+      //     //   infowindow.open(map, marker);
+      //     // });
+      //     var content="<b>Name:</b> "+d['name']+"<br>"+"<b>Description:</b> "+d['description']+"<br><b>Phone Number:</b> "+d['phone_number'];
+      //     google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+      //         return function() {
+      //             infowindow.setContent(content);
+      //             infowindow.open(map,marker);
+      //         };
+      //     })(marker,content,infowindow));  
+      //   }
+      //   console.log(markers);
+      //   console.log(infoWindows);
+      // });
+    </script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClfKSXKMJ32Uogcogc-idokYjhCcGyd2Y&callback=initMap"
+    async defer></script> -->
+  </body>
+</html>
