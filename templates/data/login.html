@@ -16,7 +16,11 @@
 		{{usfo.as_table}}
 	<input type="submit" name="submit" value="SUBMIT">
 	</form> -->
+    <div style="margin-top: 30px; float: right; margin-right: 65px;">
 
+                        <a href="{% url 'signup' %}"><div style="display: inline-block;font-size: 25px; margin-right: 10px;color: black;">Signup</div></a>
+
+    </div>
 	<div style="position: fixed;  top: 30%;  left: 50%;transform: translate(-50%, -50%); ">
         <form method="POST" enctype="html/text" action="{% url 'login' %}" >
             {% csrf_token %}

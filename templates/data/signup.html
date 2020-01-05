@@ -5,6 +5,12 @@
 </head>
 {% load static %}
 <body style="background-image: url({% static 'images/OG1FLx.jpg' %})">
+	<div style="margin-top: 30px; float: right; margin-right: 65px;">
+
+                        <a href="{% url 'login' %}"><div style="display: inline-block;font-size: 25px; margin-right: 10px;color: black;">Login</div></a>
+                        
+
+        </div>
 	<div style="position: fixed;  top: 40%;  left: 50%;transform: translate(-50%, -50%);">
 		<form method="POST" enctype="html/text" action="{% url 'signup' %}" >
 			{% csrf_token %}
