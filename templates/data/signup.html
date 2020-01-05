@@ -4,6 +4,11 @@
 	<title>Login Page</title>
 </head>
 {% load static %}
+<style type="text/css">
+	body{
+		font-family: Arial, Helvetica, sans-serif;
+	}
+</style>
 <body style="background-image: url({% static 'images/OG1FLx.jpg' %})">
 	<div style="margin-top: 30px; float: right; margin-right: 65px;">
 
@@ -16,25 +21,29 @@
 			{% csrf_token %}
 		<!-- {{usfo.as_table}} -->
 
-		<div style="margin-bottom: 10px;">
-	            <div >{{usfo.email.label}}</div>
-	            <div>{{usfo.email}}</div>
-	            <div>{{usfo.email.errors}}</div>
-	    </div>
 	    <div style="margin-bottom: 10px;">
 	            <div >{{usfo.username.label}}</div>
 	            <div>{{usfo.username}}</div>
-	            <div>{{usfo.username.errors}}</div>
+	            <!-- <div>{{usfo.username.errors}}</div> -->
+	            {% for err in usfo.username.errors%}
+                    <span style="color: red;">{{ err }}</span><br>
+                {% endfor %}
 	    </div>
 	    <div style="margin-bottom: 10px;">
 	            <div >{{usfo.password1.label}}</div>
 	            <div>{{usfo.password1}}</div>
-	            <div>{{usfo.password1.errors}}</div>
+	            <!-- <div>{{usfo.password1.errors}}</div> -->
+	            {% for err in usfo.password1.errors%}
+                    <span style="color: red;">{{ err }}</span><br>
+                {% endfor %}
 	    </div>
 	    <div style="margin-bottom: 10px;">
 	            <div >{{usfo.password2.label}}</div>
 	            <div>{{usfo.password2}}</div>
-	            <div>{{usfo.password2.errors}}</div>
+	            <!-- <div>{{usfo.password2.errors}}</div> -->
+	            {% for err in usfo.password2.errors%}
+                    <span style="color: red;">{{ err }}</span><br>
+                {% endfor %}
 	    </div>
 	                <!-- <div>{{usfo.password.label}}<br>{{usfo.password}}</div> -->
 
