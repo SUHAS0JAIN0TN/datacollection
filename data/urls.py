@@ -16,7 +16,8 @@ urlpatterns = [
     path('query2-table/',views.query2_table,name='query2_table'),
     path('query3-table/',views.query3_table,name='query3_table'),
 
-
+    path('all-query/',views.all_query,name='all_query'),
+    path('all-query-csv/',views.all_query_csv,name='all_query_csv'),
 
     # path('thanks/', views.thanks, name='thanks'),
     # path('up/<str:typ>',views.up ,name='up'),

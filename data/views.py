@@ -162,16 +162,16 @@ def query1_table(request):
 		print(x) 
 		# writer.writerow(x)
 		table_data+="<tr>"
-		table_data+="<td style='border: 2px black solid'>x[0]</td>"
-		table_data+="<td style='border: 2px black solid'>x[1]</td>"
-		table_data+="<td style='border: 2px black solid'>x[2]</td>"
-		table_data+="<td style='border: 2px black solid'>x[3]</td>"
-		table_data+="<td style='border: 2px black solid'>x[4]</td>"
-		table_data+="<td style='border: 2px black solid'>x[5]</td>"
-		table_data+="<td style='border: 2px black solid'>x[6]</td>"
-		table_data+="<td style='border: 2px black solid'>x[7]</td>"
-		table_data+="<td style='border: 2px black solid'>x[8]</td>"
-		table_data+="</tr>"
+		table_data+=f"<td style='border: 2px black solid'>{x[0]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[1]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[2]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[3]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[4]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[5]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[6]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[7]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[8]}</td>"
+		table_data+=f"</tr>"
 
 	table_data="<table>"+table_data+"</table>"
 	return render(request,'data/table.html',{'table_data':table_data})
@@ -259,20 +259,20 @@ OR project_formn1.CompanyName like "%{ request.GET["Q2P3"] }%"'
 		# print(x) 
 		# writer.writerow(x)
 		table_data+="<tr>"
-		table_data+="<td style='border: 2px black solid'>x[0]</td>"
-		table_data+="<td style='border: 2px black solid'>x[1]</td>"
-		table_data+="<td style='border: 2px black solid'>x[2]</td>"
-		table_data+="<td style='border: 2px black solid'>x[3]</td>"
-		table_data+="<td style='border: 2px black solid'>x[4]</td>"
-		table_data+="<td style='border: 2px black solid'>x[5]</td>"
-		table_data+="<td style='border: 2px black solid'>x[6]</td>"
-		table_data+="<td style='border: 2px black solid'>x[7]</td>"
-		table_data+="<td style='border: 2px black solid'>x[8]</td>"
-		table_data+="<td style='border: 2px black solid'>x[9]</td>"
-		table_data+="<td style='border: 2px black solid'>x[10]</td>"
-		table_data+="<td style='border: 2px black solid'>x[11]</td>"
-		table_data+="<td style='border: 2px black solid'>x[12]</td>"
-		table_data+="<td style='border: 2px black solid'>x[13]</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[0]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[1]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[2]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[3]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[4]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[5]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[6]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[7]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[8]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[9]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[10]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[11]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[12]}</td>"
+		table_data+=f"<td style='border: 2px black solid'>{x[13]}</td>"
 		table_data+="</tr>"
 	table_data="<table>"+table_data+"</table>"
 	return render(request,'data/table.html',{'table_data':table_data})
@@ -488,12 +488,80 @@ analysisn1.AnalysisAssign LIKE "%{ request.GET["Q3P1"] }%" '
 		# writer.writerow(x)
 		table_data+="<tr>"
 		for i in range(133):
-			table_data+="<td style='border: 2px black solid'>x[i]</td>"
+			table_data+=f"<td style='border: 2px black solid'>{x[i]}</td>"
 		table_data+="</tr>"
 
 
 	table_data="<table>"+table_data+"</table>"
 	return render(request,'data/table.html',{'table_data':table_data})
+
+
+
+def all_query(request):
+	mydb = mysql.connect(
+		host=legacy_database["host"],
+		user=legacy_database["user"],passwd=legacy_database["password"],
+		database=legacy_database["database"]
+		)
+	mycursor = mydb.cursor()
+	print("\n\n\n\n\n",request.GET,'\n\n\n\n')
+	request.session['query']=request.GET['query']
+	quer=request.GET['query']
+
+
+	print(quer)
+	print("\n\n\n\n\n")
+	print(request.session.get('query',None))
+	mycursor.execute(quer)
+	myresult = mycursor.fetchall()
+
+	table_data="<th>"
+	for i in range(len(mycursor.description)):
+		table_data+=f"<td style='border: 2px black solid'>{mycursor.description[i][0]}</td>"
+	table_data+="</th>"
+
+	for x in myresult:
+		# print(x) 
+		# writer.writerow(x)
+		table_data+="<tr>"
+		for i in range(len(mycursor.description)):
+			table_data+="<td style='border: 2px black solid'>x[i]</td>"
+		table_data+="</tr>"
+
+	table_data="<table>"+table_data+"</table>"
+	return render(request,'data/table.html',{'table_data':table_data})
+
+
+def all_query_csv(request):
+	mydb = mysql.connect(
+		host=legacy_database["host"],
+		user=legacy_database["user"],passwd=legacy_database["password"],
+		database=legacy_database["database"]
+		)
+	mycursor = mydb.cursor()
+	quer=request.session.get('query',None)
+
+
+	print(quer)
+	mycursor.execute(quer)
+	myresult = mycursor.fetchall()
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = f'attachment; filename="queryGET_{str(datetime.datetime.now())}.csv"'
+	writer = csv.writer(response)
+	header = []
+	for i in range(len(mycursor.description)):
+		header.append(mycursor.description[i][0])
+	writer.writerow(header)
+
+
+	print(len(myresult))
+	for x in myresult:
+		print(x) 
+		writer.writerow(x)
+
+	return response
+
+
 def logout(request):
 	auth_logout(request)
 	return HttpResponseRedirect(reverse('login'))

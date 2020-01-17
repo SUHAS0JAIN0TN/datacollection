@@ -118,7 +118,14 @@
               </span>
             </div>
           </div>
-          <div></div>
+          <div>
+            <h3>All queries</h3>
+            <form method="GET" action="{% url 'all_query' %}">
+              {% csrf_token %}
+              <textarea name="query" style="width: 500px;height: 200px;"></textarea>
+              <input type="submit" name="submit">
+            </form>
+          </div>
 
         </div>
 

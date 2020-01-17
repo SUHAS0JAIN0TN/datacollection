@@ -5,6 +5,7 @@
 </head>
 <body>
 	<div style="margin: 0 auto; width: 1200px;margin-top: 20px;">
+		<a style="margin-left: 6px;" href="{% url 'all_query_csv' %}"><input type="submit" name="csv" value="click to get in sheet"></a>
 			{{ table_data | safe}}
 		
 	</div>
